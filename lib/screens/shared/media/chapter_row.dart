@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:fladder/util/custom_cache_manager.dart';
+import 'package:fladder/util/sticky_header_text.dart';
+import 'package:fladder/widgets/shared/chapter_timeline.dart';
 import 'package:fladder/widgets/shared/trick_play_image.dart';
 import 'package:flutter/material.dart';
 
@@ -135,8 +137,19 @@ class ChapterRow extends ConsumerWidget {
               contentPadding: contentPadding,
             );
           }
-          // TODO: return ChapterTimeline(chapters, onPressed, contentPadding)
-          return Container(padding: contentPadding, child: const Text("This is going to be a timeline view :D"));
+          return Padding(
+            padding: contentPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StickyHeaderText(label: context.localized.chapter(chapters.length)),
+                ChapterTimeline(
+                  chapters: chapters,
+                  onPressed: onPressed,
+                ),
+              ],
+            ),
+          );
         });
   }
 }
